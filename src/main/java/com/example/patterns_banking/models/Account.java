@@ -21,10 +21,12 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)private
-    String number;
+    @Column(unique = true, nullable = false)
+    private String number;
 
-    @Enumerated(EnumType.STRING)private AccountType type;
+    @Enumerated(EnumType.STRING)
+    private AccountType type;
+
     private BigDecimal balance;
 
     private Boolean isActive = true;
