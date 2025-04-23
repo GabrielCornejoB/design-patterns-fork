@@ -37,6 +37,7 @@ public class Account {
         this.id = builder.id;
         this.number = builder.number;
         this.balance = builder.balance;
+        this.type = builder.accountType;
         this.isActive = builder.isActive;
     }
 
@@ -48,6 +49,7 @@ public class Account {
     public static class Builder {
         private Long id;
         private String number;
+        private AccountType accountType;
         private BigDecimal balance;
         private Boolean isActive;
 
@@ -65,6 +67,11 @@ public class Account {
 
         public Builder balance(BigDecimal balance) {
             this.balance = balance;
+            return this;
+        }
+
+        public Builder accountType(AccountType accountType) {
+            this.accountType = accountType;
             return this;
         }
 

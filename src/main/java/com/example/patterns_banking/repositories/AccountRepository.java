@@ -19,7 +19,7 @@ public class AccountRepository {
                     "id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
                     "number VARCHAR(50) NOT NULL, " +
                     "type VARCHAR(50) NOT NULL, " +
-                    "balance BIGDECIMAL NOT NULL UNIQUE," +
+                    "balance DECIMAL NOT NULL UNIQUE," +
                     "isActive BOOLEAN NOT NULL UNIQUE" +
                     ")";
 
@@ -53,7 +53,8 @@ public class AccountRepository {
         try (Connection conn = getConnection()) {
             try (PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, account.getNumber());
-                pstmt.setString(2, String.valueOf(account.getType()));
+                System.out.println(account.getType().name());
+                pstmt.setString(2, account.getType().name());
                 pstmt.setBigDecimal(3, account.getBalance());
                 pstmt.setBoolean(4, account.getIsActive());
 
