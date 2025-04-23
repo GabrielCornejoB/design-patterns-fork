@@ -17,10 +17,10 @@ public class AccountRepository {
 
     private static final String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS accounts (" +
                     "id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
-                    "number VARCHAR(50) NOT NULL, " +
+                    "number VARCHAR(50) NOT NULL UNIQUE, " +
                     "type VARCHAR(50) NOT NULL, " +
-                    "balance DECIMAL NOT NULL UNIQUE," +
-                    "isActive BOOLEAN NOT NULL UNIQUE" +
+                    "balance DECIMAL NOT NULL," +
+                    "isActive BOOLEAN NOT NULL" +
                     ")";
 
     private static final String INSERT_SQL = "INSERT INTO accounts (number, type, balance, isActive) " +
@@ -53,7 +53,6 @@ public class AccountRepository {
         try (Connection conn = getConnection()) {
             try (PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, account.getNumber());
-                System.out.println(account.getType().name());
                 pstmt.setString(2, account.getType().name());
                 pstmt.setBigDecimal(3, account.getBalance());
                 pstmt.setBoolean(4, account.getIsActive());
